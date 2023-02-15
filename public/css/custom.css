@@ -1,0 +1,24 @@
+.blur {
+    backdrop-filter: saturate(200%) blur(30px);
+    background-color: hsla(0, 0%, 100%, 0.8) !important;
+}
+
+.shadow-blur {
+    box-shadow: inset 0 0 1px 1px hsla(0, 0%, 99.6%, 0.9),
+        0 20px 27px 0 rgba(157, 157, 157, 0.528) !important;
+}
+
+.warning-shadow-blur {
+    box-shadow: inset 0 0 1px 1px rgba(251, 140, 0, 0.9),
+        0 20px 27px 0 rgba(251, 140, 0, 0.528) !important;
+}
+
+.info-shadow-blur {
+    box-shadow: inset 0 0 1px 1px rgba(33, 150, 243, 0.9),
+        0 20px 27px 0 rgba(33, 150, 243, 0.3) !important;
+}
+
+.gradient-green-button {
+    background: rgb(93,214,28);
+    background: linear-gradient(183deg, rgba(93,214,28,1) 0%, rgba(13,126,53,1) 100%);
+}
