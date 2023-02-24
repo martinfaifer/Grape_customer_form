@@ -1,229 +1,186 @@
 <template>
     <v-main>
-        <v-container>
-            <v-col cols="12">
-                <v-card
-                    rounded="lg"
-                    class="overflow-hidden rounded-xl blur shadow-blur"
-                    elevation-12
-                    color="white"
-                >
-                    <v-card-text>
-                        <v-container>
-                            <v-row>
-                                <v-col v-if="serverResponse.length != 0" cols="12">
-                                    <v-alert
-                                        :color="serverResponse.status"
-                                        :title="serverResponse.message"
-                                    >
-                                    </v-alert>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="6" lg="6">
-                                    <v-text-field
-                                        density="compact"
-                                        variant="outlined"
-                                        :error-messages="errors.name"
-                                        v-model="formData.name"
-                                        label="Jméno"
-                                        name="name"
-                                        prepend-inner-icon="mdi-account"
-                                        type="text"
-                                        autofocus
-                                        class="my-1"
-                                        clearable
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="6" lg="6">
-                                    <v-text-field
-                                        density="compact"
-                                        variant="outlined"
-                                        :error-messages="errors.surname"
-                                        v-model="formData.surname"
-                                        label="Příjmení"
-                                        name="surname"
-                                        prepend-inner-icon="mdi-account"
-                                        type="text"
-                                        class="my-1"
-                                        clearable
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="4" lg="4">
-                                    <v-text-field
-                                        density="compact"
-                                        variant="outlined"
-                                        :error-messages="errors.street"
-                                        v-model="formData.street"
-                                        label="Ulice + číslo popisné"
-                                        name="street"
-                                        prepend-inner-icon="mdi-office-building-outline"
-                                        type="text"
-                                        class="my-1"
-                                        clearable
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="4" lg="4">
-                                    <v-text-field
-                                        density="compact"
-                                        variant="outlined"
-                                        :error-messages="errors.city"
-                                        v-model="formData.city"
-                                        label="Město"
-                                        name="city"
-                                        prepend-inner-icon="mdi-city"
-                                        type="text"
-                                        class="my-1"
-                                        clearable
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="4" lg="4">
-                                    <v-text-field
-                                        density="compact"
-                                        variant="outlined"
-                                        :error-messages="errors.post_code"
-                                        v-model="formData.post_code"
-                                        label="Číslo popisné"
-                                        name="post_code"
-                                        type="text"
-                                        class="my-1"
-                                        clearable
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="4" lg="4">
-                                    <v-text-field
-                                        density="compact"
-                                        variant="outlined"
-                                        :error-messages="errors.birthday"
-                                        v-model="formData.birthday"
-                                        label="Datum narození"
-                                        name="birthday"
-                                        prepend-inner-icon="mdi-cake"
-                                        type="text"
-                                        class="my-1"
-                                        clearable
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="4" lg="4">
-                                    <v-text-field
-                                        density="compact"
-                                        variant="outlined"
-                                        :error-messages="errors.telephone"
-                                        v-model="formData.telephone"
-                                        label="Telefon"
-                                        name="telephone"
-                                        prepend-inner-icon="mdi-phone"
-                                        type="text"
-                                        class="my-1"
-                                        clearable
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="4" lg="4">
-                                    <v-text-field
-                                        density="compact"
-                                        variant="outlined"
-                                        :error-messages="errors.email"
-                                        v-model="formData.email"
-                                        label="Email"
-                                        name="email"
-                                        prepend-inner-icon="mdi-email"
-                                        type="text"
-                                        class="my-1"
-                                        clearable
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="12" lg="12">
-                                    <v-text-field
-                                        density="compact"
-                                        variant="outlined"
-                                        :error-messages="errors.service"
-                                        v-model="formData.service"
-                                        label="Služba"
-                                        name="service"
-                                        prepend-inner-icon="mdi-room-service"
-                                        type="text"
-                                        class="my-1"
-                                        clearable
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="12" lg="12">
-                                    <v-textarea
-                                        density="compact"
-                                        variant="outlined"
-                                        :error-messages="errors.note"
-                                        v-model="formData.note"
-                                        label="Poznámka"
-                                        name="note"
-                                        prepend-inner-icon="mdi-note"
-                                        type="text"
-                                        class="my-1"
-                                        clearable
-                                    ></v-textarea>
-                                </v-col>
-                            </v-row>
-                        </v-container>
-                    </v-card-text>
-                    <v-card-actions>
+        <v-app-bar flat>
+            <v-app-bar-title>
+                <v-img
+                    style="cursor: pointer"
+                    @click="goHome()"
+                    width="120"
+                    src="images/png.png"
+                ></v-img>
+            </v-app-bar-title>
+            <template v-slot:append>
+                <v-menu>
+                    <template v-slot:activator="{ props }">
                         <v-btn
-                            @click="submitForm()"
-                            block
-                            rounded="lg"
-                            class="text-white gradient-green-button"
-                            style="
-                                background: rgb(93, 214, 28);
-                                background: linear-gradient(
-                                    183deg,
-                                    rgba(93, 214, 28, 1) 0%,
-                                    rgba(13, 126, 53, 1) 100%
-                                );
-                            "
-                        >
-                            Odeslat
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-col>
+                            icon="mdi-account"
+                            size="small"
+                            v-bind="props"
+                        ></v-btn>
+                    </template>
+
+                    <v-list density="compact">
+                        <v-list-item prepend-icon="mdi-account-multiple">
+                            <v-list-item-title
+                                class="text-body-2"
+                                @click="goToCustomer()"
+                                style="cursor: pointer"
+                            >
+                                Přehled zákazníklů
+                            </v-list-item-title>
+                        </v-list-item>
+                        <v-divider></v-divider>
+                        <v-list-item prepend-icon="mdi-account-multiple">
+                            <v-list-item-title
+                                class="text-body-2"
+                                @click="goToUsers()"
+                                style="cursor: pointer"
+                            >
+                                Přehled uživatelů
+                            </v-list-item-title>
+                        </v-list-item>
+                        <v-list-item prepend-icon="mdi-lock">
+                            <v-list-item-title
+                                class="text-body-2"
+                                @click="goToUser()"
+                                style="cursor: pointer"
+                            >
+                                Změna hesla
+                            </v-list-item-title>
+                        </v-list-item>
+                        <v-divider></v-divider>
+                        <v-list-item prepend-icon="mdi-logout">
+                            <v-list-item-title
+                                class="text-body-2"
+                                @click="logout()"
+                                style="cursor: pointer"
+                            >
+                                Odhlásit se
+                            </v-list-item-title>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
+            </template>
+        </v-app-bar>
+        <v-container>
+            <v-row>
+                <!-- <v-col cols="12" sm="12" md="3" lg="3">
+                    <v-btn
+                        type="text"
+                        color="blue"
+                        @click="generatePromo()"
+                        :loading="loading"
+                    >
+                        Vygenerovat promo přístupy do GeniusTV
+                    </v-btn>
+                </v-col> -->
+                <v-col cols="12" sm="12" md="12" lg="12">
+                    <Form v-if="!$route.params.component"></Form>
+                    <Customers
+                        v-if="$route.params.component == 'customers'"
+                    ></Customers>
+                    <User v-if="$route.params.component == 'user'"></User>
+                    <Users v-if="$route.params.component == 'users'"></Users>
+                </v-col>
+            </v-row>
+            <div class="text-center">
+                <v-dialog v-model="promoDialog" max-width="450" persistent>
+                    <v-card>
+                        <v-card-text>
+                            <p class="my-2">
+                                Uživatelské jméno:
+                                <span class="font-weight-medium">{{
+                                    promoLogin.subscriberCode
+                                }}</span>
+                            </p>
+                            <p class="my-2">
+                                Heslo:
+                                <span class="font-weight-medium">{{
+                                    promoLogin.subscriberCode
+                                }}</span>
+                            </p>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn color="primary" block @click="closeDialog()"
+                                >Zavřít</v-btn
+                            >
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+            </div>
         </v-container>
     </v-main>
 </template>
 
 <script>
 import axios from "axios";
+
+import Form from "./Form.vue";
+import Customers from "./Customers.vue";
+import User from "./User.vue";
+import Users from "./Users.vue";
 export default {
     data() {
         return {
-            formData: [],
-            errors: [],
-            serverResponse: [],
-            alertData: [],
+            loading: false,
+            user: [],
+            promoLogin: [],
+            promoDialog: false,
         };
     },
 
-    components: {},
-    created() {},
+    components: { Form, Customers, User, Users },
+    created() {
+        this.index();
+    },
     methods: {
-        submitForm() {
+        index() {
             axios
-                .post("customer", {
-                    name: this.formData.name,
-                    surname: this.formData.surname,
-                    street: this.formData.street,
-                    city: this.formData.city,
-                    post_code: this.formData.post_code,
-                    birthday: this.formData.birthday,
-                    telephone: this.formData.telephone,
-                    email: this.formData.email,
-                    service: this.formData.service,
-                    note: this.formData.note,
-                })
+                .get("user/logged")
                 .then((response) => {
-                    this.serverResponse = response.data;
-                    this.formData = [];
-                    setTimeout(() => {
-                        this.serverResponse = [];
-                    }, 10000);
+                    this.user = response.data;
                 })
                 .catch((error) => {
-                    this.errors = error.response.data.errors;
+                    if (error.response.status == 403) {
+                        this.$router.push("/login");
+                    }
                 });
+        },
+
+        generatePromo() {
+            this.loading = true;
+            axios.post("customer/promo").then((response) => {
+                this.loading = false;
+                this.promoLogin = response.data;
+                this.promoDialog = true;
+            });
+        },
+
+        closeDialog() {
+            this.promoDialog = false;
+            this.promoLogin = [];
+        },
+
+        goHome() {
+            this.$router.push("/");
+        },
+
+        goToCustomer() {
+            this.$router.push("/customers");
+        },
+
+        goToUser() {
+            this.$router.push("/user");
+        },
+
+        goToUsers() {
+            this.$router.push("/users");
+        },
+
+        logout() {
+            axios.post("logout").then((response) => {
+                this.$router.push("/login");
+            });
         },
     },
     watch: {},

@@ -23,7 +23,8 @@ class SubmitNewCustomerController extends Controller
         SendCustomerDataJob::dispatch($customerStoreActionResponse);
         return [
             'status' => "success",
-            'message' => "Vytvořeno, email bude brzy odeslán"
+            'message' => "Vytvořeno, email bude brzy odeslán",
+            'data' => $customerStoreActionResponse
         ];
     }
 }

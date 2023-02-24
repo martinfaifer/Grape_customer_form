@@ -18,4 +18,9 @@ class Customer extends Model
         'service',
         'note'
     ];
+
+    public function promo()
+    {
+        return $this->hasOne(NanguPromoCustomer::class, 'customer_id', 'id');
+    }
 }

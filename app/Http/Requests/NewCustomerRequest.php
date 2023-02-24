@@ -36,7 +36,8 @@ class NewCustomerRequest extends FormRequest
             'telephone' => ['nullable', 'string', 'max:13', 'min:9'],
             'email' => ['nullable', 'email', 'max:250'],
             'service' => ['nullable', 'string', 'max:250'],
-            'note' => ['nullable', 'string']
+            'note' => ['nullable', 'string'],
+            'isPromo' => ['required', 'boolean']
         ];
     }
 
@@ -67,7 +68,9 @@ class NewCustomerRequest extends FormRequest
             'email.max' => "Maximální počet znaků je 250",
             'service.string' => "Neplatný formát",
             'service.max' => "Maximální počet znaků je 250",
-            'note.string' => "Neplatný formát"
+            'note.string' => "Neplatný formát",
+            'isPromo.required' => "Chce zákazník promo nabídku?",
+            'isPromo.boolean' => "Neplatný formát"
         ];
     }
 }
