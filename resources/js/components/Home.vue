@@ -144,6 +144,10 @@ export default {
                     if (error.response.status == 403) {
                         this.$router.push("/login");
                     }
+
+                    if (error.response.status == 401) {
+                        this.$router.push("/login");
+                    }
                 });
         },
 
